@@ -1,0 +1,30 @@
+@import "./src/assets/scss/variables";
+
+.appHeader {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  min-height: 60px;
+  align-items: center;
+  padding-bottom: 30px;
+  padding-top: 30px;
+  border-bottom: 3px solid $color-gray;
+
+  &__nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+  }
+
+  &__person {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

@@ -1,0 +1,19 @@
+@import "../../assets/scss/variables";
+
+.appExchange {
+
+  &__item {
+    display: flex;
+    align-items: center;
+  }
+
+  &__flag {
+    width: 20px;
+  }
+
+  span {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+}

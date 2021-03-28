@@ -1,0 +1,16 @@
+@import "./src/assets/scss/variables";
+
+.appSideBar {
+
+  &-header {
+
+    &__title {
+      font-size: 20px;
+    }
+
+    &__img {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}

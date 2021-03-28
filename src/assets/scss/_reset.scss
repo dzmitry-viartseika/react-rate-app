@@ -10,6 +10,10 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   display: block;
 }
 
+ul, li {
+  list-style: none;
+}
+
 body {
   line-height: 1;
 }

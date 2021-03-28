@@ -4,5 +4,22 @@
   max-width: 1300px;
   width: 100%;
   margin: 0 auto;
-  color: red;
+
+  &-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    height: 500px;
+
+    &-main {
+      width: 100%;
+      background: red;
+      height: 500px;
+    }
+
+    &-sidebar {
+      width: 100%;
+      background: green;
+      height: 500px;
+    }
+  }
 }

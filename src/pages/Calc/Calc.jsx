@@ -1,6 +1,7 @@
 import React, {useContext, useState} from 'react';
 import classes from './calc.module.scss';
 import { RateContext } from '../../context/RateContext';
+import ButtonTemplate from "../../components/Elements/Button/ButtonTemplate";
 
 const Calc = () => {
 
@@ -22,10 +23,14 @@ const Calc = () => {
                     ))
                 }
             </select>
-
-            <p>{ JSON.stringify(defaultSetting.result) }</p>
-
-            <button onClick={() => calculateHandler(defaultSetting.currencyValue)}>Посчитать</button>
+            {
+                defaultSetting.result ? <p>{ JSON.stringify(defaultSetting.result) }</p> : null
+            }
+            <ButtonTemplate
+                buttonText={'Подсчитать'}
+                clickEvent={calculateHandler}
+                arg={defaultSetting.currencyValue}
+            />
         </div>
     )
 };

@@ -5,7 +5,8 @@ const Info = () => {
 
     return (
         <div className={classes.appInfo}>
-            Info
+            <h3 className={classes['appInfo__title']}>Currency conversion application</h3>
+            <p className={classes['appInfo__text']}>Author: </p>
         </div>
     )
 };

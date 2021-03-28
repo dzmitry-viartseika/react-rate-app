@@ -2,7 +2,8 @@ import React, { useEffect, useState} from 'react';
 import Laoyut from "./components/Layouts/Laoyut";
 import './assets/scss/style.scss';
 import { RateContext } from './context/RateContext';
-import currencyApi from './api/currencyApi/api'
+import currencyApi from './api/currencyApi/api';
+import firebaseApi from './api/firebaseApi/api';
 import currencyList from "./constants/currency/currencyList";
 
 function App() {
@@ -13,15 +14,40 @@ function App() {
         inputValue: 100,
         currencyValue: 'USD',
         result: null
+    });
+
+    const [sampleValue, setSampleValue] = useState({
+        sample: {
+            base: 'USD',
+            base2: 'RUB',
+            date: '',
+            course: '',
+        },
+        sampleList: ''
     })
 
-    console.log('defaultSetting', defaultSetting)
+    const createSample = async (sample) => {
+        try {
+            await firebaseApi.createSample(sample);
+            const { data } = await firebaseApi.getAllSamples();
+            console.log(data);
+            setSampleValue(prev => {
+                return {
+                    ...prev,
+                    sampleList: data,
+                }
+            })
+        } catch (err) {
+            console.error(err);
+        }
+    }
 
     const inputValueHandler = event => {
         setDefaultSetting(prev => {
             return {
                 ...prev,
-                inputValue: event.target.value
+                inputValue: event.target.value,
+                result: null
             }
         })
     };
@@ -30,13 +56,13 @@ function App() {
         setDefaultSetting(prev => {
             return {
                 ...prev,
-                currencyValue: event.target.value
+                currencyValue: event.target.value,
+                result: null
             }
         })
     };
 
     const calculateHandler = async (value) => {
-        console.log('value', value)
         let result;
         try {
             const { data } = await currencyApi.getRubConvert();
@@ -50,6 +76,38 @@ function App() {
         } catch (err) {
             console.error(err);
         }
+    }
+
+    const baseHandle = event => {
+        setSampleValue(prev => {
+            return {
+                ...prev,
+                sample: {
+                    base: event.target.value
+                }
+            }
+        })
+    }
+
+    const base2Handle = event => {
+        setSampleValue(prev => {
+            return {
+                ...prev,
+                sample: {
+                    base2: event.target.value
+                }
+            }
+        })
+    }
+
+
+    const sampleDateHandle = event => {
+        setSampleValue(prev => {
+            return {
+                ...prev,
+                date: event.target.value
+            }
+        })
     }
 
      useEffect(() => {
@@ -75,9 +133,14 @@ function App() {
         <RateContext.Provider value={{
             state: currencyDatas,
             defaultSetting,
+            sampleValue,
             inputValueHandler,
+            createSample,
             selectValueHandler,
             calculateHandler,
+            sampleDateHandle,
+            base2Handle,
+            baseHandle,
         }}>
             <Laoyut />
         </RateContext.Provider>

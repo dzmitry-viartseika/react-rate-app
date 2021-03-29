@@ -54,10 +54,8 @@ const Sample = () => {
                         arg={sampleValue.sample}
                     />
                 </div>
+                <p>{JSON.stringify(sampleValue.sampleList)}</p>
                 <div className = 'sampleResult'>
-                    <ul>
-                        <p>{JSON.stringify(sampleValue.sampleList)}</p>
-                    </ul>
                 </div>
             </div>
         </div>

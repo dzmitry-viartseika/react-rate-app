@@ -28,6 +28,17 @@ function App() {
 
     const createSample = async (sample) => {
         try {
+            const response = await currencyApi.getDateCourse(sample.date, sample.base);
+            setSampleValue(prev => {
+                const objSample = prev.sample;
+                return {
+                    ...prev,
+                    sample: {
+                        ...objSample,
+                        course: response.data.rates[objSample.base2]
+                    }
+                }
+            })
             await firebaseApi.createSample(sample);
             const { data } = await firebaseApi.getAllSamples();
             console.log(data);
@@ -80,9 +91,11 @@ function App() {
 
     const baseHandle = event => {
         setSampleValue(prev => {
+            const objSample = prev.sample;
             return {
                 ...prev,
                 sample: {
+                    ...objSample,
                     base: event.target.value
                 }
             }
@@ -91,9 +104,11 @@ function App() {
 
     const base2Handle = event => {
         setSampleValue(prev => {
+            const objSample = prev.sample;
             return {
                 ...prev,
                 sample: {
+                    ...objSample,
                     base2: event.target.value
                 }
             }
@@ -102,10 +117,15 @@ function App() {
 
 
     const sampleDateHandle = event => {
+        console.log('event.target.value', event.target.value)
         setSampleValue(prev => {
+            const objSample = prev.sample;
             return {
                 ...prev,
-                date: event.target.value
+                sample: {
+                    ...objSample,
+                    date: event.target.value
+                }
             }
         })
     }

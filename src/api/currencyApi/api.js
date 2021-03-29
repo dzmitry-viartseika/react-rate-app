@@ -13,5 +13,11 @@ export default {
       baseURL: CURRENT_SERVER,
     });
     return instCred.get('latest?base=RUB');
+  },
+  getDateCourse(date, base) {
+    const instCred = axios.create({
+      baseURL: CURRENT_SERVER,
+    });
+    return instCred.get(`${date}?base=${base}`);
   }
 };
